@@ -1,0 +1,203 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+
+    --primary: 48 100% 85%;
+    --primary-foreground: 0 0% 10%;
+
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+
+    --accent: 48 100% 85%;
+    --accent-foreground: 0 0% 9%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading font-medium tracking-tight;
+  }
+
+  h1 {
+    @apply font-medium;
+  }
+
+  h2 {
+    @apply font-medium;
+  }
+
+  p {
+    @apply font-sans leading-relaxed;
+  }
+}
+
+@layer components {
+  .animate-delay-100 {
+    animation-delay: 100ms;
+  }
+  .animate-delay-200 {
+    animation-delay: 200ms;
+  }
+  .animate-delay-300 {
+    animation-delay: 300ms;
+  }
+  .animate-delay-400 {
+    animation-delay: 400ms;
+  }
+  .animate-delay-500 {
+    animation-delay: 500ms;
+  }
+
+  .salon-container {
+    @apply container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl lg:text-5xl font-heading font-bold tracking-tight text-salon-black;
+  }
+
+  .section-subtitle {
+    @apply text-lg md:text-xl text-salon-gray max-w-3xl mx-auto mt-4 font-sans;
+  }
+
+  .divider {
+    @apply w-16 h-1 bg-gold-dark mx-auto my-6 rounded-full;
+  }
+
+  .service-card {
+    @apply bg-white rounded-xl p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border border-gold/50;
+  }
+
+  .nav-link {
+    @apply relative text-sm font-medium text-salon-black transition-colors after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-0 after:bg-salon-black after:transition-all hover:after:w-full;
+  }
+
+  .nav-link-active {
+    @apply after:w-full;
+  }
+
+  .btn-primary {
+    @apply bg-gold text-salon-black hover:bg-gold-dark transition-colors px-6 py-3 rounded-lg font-medium;
+  }
+
+  .btn-secondary {
+    @apply bg-white border border-gold text-salon-black hover:bg-gold-light transition-colors px-6 py-3 rounded-lg font-medium;
+  }
+
+  .btn-outline {
+    @apply bg-transparent border border-salon-black text-salon-black hover:bg-salon-black hover:text-white transition-colors px-6 py-3 rounded-lg font-medium;
+  }
+
+  .feature-card {
+    @apply bg-white p-8 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gold/50;
+  }
+
+  .team-card {
+    @apply bg-white p-8 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gold/50 text-center;
+  }
+
+  .blog-card {
+    @apply bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gold/50;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--gold-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gold-dark);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #daa520;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Image hover effects */
+.image-zoom {
+  overflow: hidden;
+}
+
+.image-zoom img {
+  transition: transform 0.5s ease;
+}
+
+.image-zoom:hover img {
+  transform: scale(1.05);
+}
+
