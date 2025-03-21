@@ -107,15 +107,8 @@ export default function Footer() {
                   <div className="flex items-start space-x-2">
                     <Clock className="h-4 w-4 text-gold mt-0.5 shrink-0" />
                     <div>
-                      <p className="text-sm font-medium text-white">Lundi - Dimanche</p>
+                      <p className="text-sm font-medium text-white">Toute la semaine</p>
                       <p className="text-xs text-white/70">9h - 21h</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start space-x-2">
-                    <Clock className="h-4 w-4 text-gold mt-0.5 shrink-0" />
-                    <div>
-                      <p className="text-sm font-medium text-white">Vendredi</p>
-                      <p className="text-xs text-white/70">2h - 21h</p>
                     </div>
                   </div>
                 </div>

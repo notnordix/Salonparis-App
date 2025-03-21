@@ -158,20 +158,12 @@ export default function ContactPage() {
                 </div>
                 <div className="flex-1">
                   <h4 className="font-heading font-bold text-lg mb-4">Horaires d'ouverture</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
                     <div className="bg-cream/20 p-4 rounded-lg">
                       <div className="flex justify-between items-center">
-                        <span className="text-salon-gray font-medium">Lundi - Dimanche</span>
+                        <span className="text-salon-gray font-medium">Toute la semaine</span>
                         <span className="text-salon-black font-medium bg-cream py-1 px-3 rounded-full text-sm">
                           9h - 21h
-                        </span>
-                      </div>
-                    </div>
-                    <div className="bg-cream/20 p-4 rounded-lg">
-                      <div className="flex justify-between items-center">
-                        <span className="text-salon-gray font-medium">Vendredi</span>
-                        <span className="text-salon-black font-medium bg-cream py-1 px-3 rounded-full text-sm">
-                          2h - 21h
                         </span>
                       </div>
                     </div>
