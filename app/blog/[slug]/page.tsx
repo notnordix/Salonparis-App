@@ -1,3 +1,5 @@
+"use client"
+
 import { useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
@@ -151,14 +153,9 @@ const blogPosts = {
   },
 }
 
-type BlogPostPageProps = {
-  params: {
-    slug: string
-  }
-}
-
-export default function BlogPostPage({ params }: BlogPostPageProps) {
-  const post = blogPosts[params.slug as keyof typeof blogPosts]
+export default function BlogPostPage({ params }: { slug: string }) {
+  const slug = params.slug
+  const post = blogPosts[slug as keyof typeof blogPosts]
 
   // For animated sections
   const contentRef = useRef<HTMLDivElement>(null)
@@ -256,3 +253,4 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     </div>
   )
 }
+
