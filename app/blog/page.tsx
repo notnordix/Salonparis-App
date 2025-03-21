@@ -17,7 +17,7 @@ export default function BlogPage() {
       excerpt:
         "Depuis plus de quatre décennies, Le Salon de Paris s'est imposé comme une référence incontournable dans l'univers de la coiffure de prestige.",
       date: "15 Mars 2025",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/blog1.jpg?height=400&width=600",
     },
     {
       id: "chic-parisien",
@@ -26,7 +26,7 @@ export default function BlogPage() {
       excerpt:
         "La coiffure parisienne incarne l'élégance naturelle et la simplicité sophistiquée dans toute sa splendeur.",
       date: "10 Mars 2025",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/blog2.jpg?height=400&width=600",
     },
     {
       id: "soins-capillaires",
@@ -34,7 +34,7 @@ export default function BlogPage() {
       subtitle: "Nos soins capillaires exclusifs",
       excerpt: "Une belle coiffure s'épanouit sur un terrain fertile : des cheveux en pleine santé.",
       date: "5 Mars 2025",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/blog3.webp?height=400&width=600",
     },
     {
       id: "coiffure-mariee",
@@ -43,7 +43,7 @@ export default function BlogPage() {
       excerpt:
         "Le jour de votre mariage représente l'apogée de votre mise en beauté, et votre coiffure doit être aussi resplendissante que votre tenue.",
       date: "28 Février 2025",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/blog4.webp?height=400&width=600",
     },
     {
       id: "massage-cuir-chevelu",
@@ -52,7 +52,7 @@ export default function BlogPage() {
       excerpt:
         "Le massage du cuir chevelu est une pratique ancestrale trop souvent négligée, pourtant fondamentale pour la vitalité capillaire.",
       date: "20 Février 2025",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/blog5.png?height=400&width=600",
     },
   ]
 
@@ -67,10 +67,19 @@ export default function BlogPage() {
     <div className="flex flex-col min-h-screen">
       <Header />
 
-      {/* Hero Section */}
-      <section ref={heroRef} className="relative pt-32 pb-20 bg-cream overflow-hidden">
-        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white/50 to-transparent"></div>
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white/50 to-transparent"></div>
+      {/* Hero Section with Background Image */}
+      <section ref={heroRef} className="relative pt-32 pb-20 overflow-hidden">
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/IMG-20250320-WA0018.jpg?height=1080&width=1920&text=Blog"
+            alt="Salon de Paris Blog"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-salon-black/80 to-salon-black/60" />
+        </div>
 
         <div className="salon-container relative z-10">
           <motion.div
@@ -79,22 +88,20 @@ export default function BlogPage() {
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
           >
-            <span className="inline-block text-salon-gray border-b-2 border-cream-dark pb-1 uppercase tracking-wider text-sm font-medium mb-4">
+            <span className="inline-block text-gold border-b-2 border-gold pb-1 uppercase tracking-wider text-sm font-medium mb-4">
               Conseils & Astuces
             </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-salon-black mb-4">
-              Notre Blog
-            </h1>
-            <div className="h-1 w-20 bg-cream-dark rounded-full mx-auto mb-6"></div>
-            <p className="text-lg text-salon-gray">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white mb-4">Notre Blog</h1>
+            <div className="h-1 w-20 bg-gold rounded-full mx-auto mb-6"></div>
+            <p className="text-lg text-white/80">
               Découvrez nos conseils et astuces pour prendre soin de vos cheveux et rester à la pointe des tendances.
             </p>
           </motion.div>
         </div>
 
         {/* Decorative elements */}
-        <div className="absolute top-[-50px] right-[-50px] w-[200px] h-[200px] rounded-full bg-cream-dark/30 blur-3xl"></div>
-        <div className="absolute bottom-[-50px] left-[-50px] w-[200px] h-[200px] rounded-full bg-cream-dark/30 blur-3xl"></div>
+        <div className="absolute top-[-50px] right-[-50px] w-[200px] h-[200px] rounded-full bg-gold/20 blur-3xl"></div>
+        <div className="absolute bottom-[-50px] left-[-50px] w-[200px] h-[200px] rounded-full bg-gold/20 blur-3xl"></div>
       </section>
 
       {/* Blog Posts */}

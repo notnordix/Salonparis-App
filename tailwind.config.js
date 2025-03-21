@@ -51,9 +51,9 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        gold: "#FFECB3", // Changed to a lighter gold
+        gold: "#FFECB3", // Lighter gold
         "gold-dark": "#FFD54F", // Adjusted to match the new lighter gold
-        "gold-light": "#FFF8E1", // Adjusted to be even lighter
+        "gold-light": "#FFF8E1", // Even lighter
         "salon-black": "#1A1A1A",
         "salon-gray": "#666666",
       },

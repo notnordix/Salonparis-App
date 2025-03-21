@@ -26,10 +26,19 @@ export default function AboutPage() {
     <div className="flex flex-col min-h-screen">
       <Header />
 
-      {/* Hero Section */}
-      <section ref={heroRef} className="relative pt-32 pb-20 bg-cream overflow-hidden">
-        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white/50 to-transparent"></div>
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white/50 to-transparent"></div>
+      {/* Hero Section with Background Image */}
+      <section ref={heroRef} className="relative pt-32 pb-20 overflow-hidden">
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/IMG-20250320-WA0019.jpg?height=1080&width=1920&text=À+Propos"
+            alt="Salon de Paris Background"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-salon-black/80 to-salon-black/60" />
+        </div>
 
         <div className="salon-container relative z-10">
           <motion.div
@@ -38,24 +47,25 @@ export default function AboutPage() {
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
           >
-            <span className="inline-block text-salon-gray border-b-2 border-cream-dark pb-1 uppercase tracking-wider text-sm font-medium mb-4">
+            <span className="inline-block text-gold border-b-2 border-gold pb-1 uppercase tracking-wider text-sm font-medium mb-4">
               Notre histoire
             </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-salon-black mb-4">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white mb-4">
               À Propos de Nous
             </h1>
-            <div className="h-1 w-20 bg-cream-dark rounded-full mx-auto mb-6"></div>
-            <p className="text-lg text-salon-gray">
+            <div className="h-1 w-20 bg-gold rounded-full mx-auto mb-6"></div>
+            <p className="text-lg text-white/80">
               Découvrez l'histoire et les valeurs qui font du Salon de Paris une référence depuis plus de 40 ans.
             </p>
           </motion.div>
         </div>
 
         {/* Decorative elements */}
-        <div className="absolute top-[-50px] right-[-50px] w-[200px] h-[200px] rounded-full bg-cream-dark/30 blur-3xl"></div>
-        <div className="absolute bottom-[-50px] left-[-50px] w-[200px] h-[200px] rounded-full bg-cream-dark/30 blur-3xl"></div>
+        <div className="absolute top-[-50px] right-[-50px] w-[200px] h-[200px] rounded-full bg-gold/20 blur-3xl"></div>
+        <div className="absolute bottom-[-50px] left-[-50px] w-[200px] h-[200px] rounded-full bg-gold/20 blur-3xl"></div>
       </section>
 
+      {/* Rest of the page content remains unchanged */}
       {/* Notre Histoire */}
       <section ref={historyRef} className="py-24 bg-white">
         <div className="salon-container">
@@ -196,7 +206,7 @@ export default function AboutPage() {
       </section>
 
       {/* Call to Action */}
-      <section ref={ctaRef} className="py-24 bg-salon-black text-white relative overflow-hidden">
+      <section ref={ctaRef} className="py-24 bg-gradient-to-b from-white to-gold-light text-black relative overflow-hidden">
         <div className="absolute top-[-100px] right-[-100px] w-[300px] h-[300px] rounded-full bg-salon-gray/10 blur-3xl"></div>
         <div className="absolute bottom-[-100px] left-[-100px] w-[300px] h-[300px] rounded-full bg-salon-gray/10 blur-3xl"></div>
 
@@ -207,7 +217,7 @@ export default function AboutPage() {
               animate={ctaInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.5 }}
             >
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-6 text-white drop-shadow-lg">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-6 text-black drop-shadow-lg">
                 Prêt à transformer votre style?
               </h2>
             </motion.div>
@@ -216,7 +226,7 @@ export default function AboutPage() {
               animate={ctaInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <p className="text-lg md:text-xl text-white/80 mb-8 leading-relaxed">
+              <p className="text-lg md:text-xl text-black/80 mb-8 leading-relaxed">
                 Réservez votre rendez-vous dès maintenant et découvrez l'excellence du Salon de Paris. Nos experts sont
                 prêts à vous accueillir et à vous offrir une expérience unique.
               </p>
@@ -229,7 +239,7 @@ export default function AboutPage() {
               <AnimatedButton
                 href="+21252442273"
                 tel={true}
-                variant="secondary"
+                variant="black"
                 animation="border-spin"
                 size="lg"
                 icon={<Phone className="h-5 w-5" />}

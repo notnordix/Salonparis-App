@@ -8,6 +8,8 @@ import { motion, useScroll, useTransform, useInView } from "framer-motion"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import AnimatedButton from "@/components/animated-button"
+import StructuredData from "@/components/structured-data"
+import ImageWithFallback from "@/components/image-with-fallback"
 
 // Typewriter effect component
 const TypewriterEffect = ({ text }: { text: string }) => {
@@ -99,6 +101,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen bg-white overflow-x-hidden">
+      <StructuredData type="salon" />
       <Header />
 
       {/* Hero Section */}
@@ -111,11 +114,13 @@ export default function Home() {
         <div className="absolute inset-0 z-0 overflow-hidden">
           <motion.div style={{ y: heroImageTransform }} className="absolute inset-0 w-full h-[120%] top-[-10%]">
             <Image
-              src="/IMG-20250320-WA0014.jpg?height=1080&width=1920"
-              alt="Salon de Paris"
+              src="/IMG-20250320-WA0014.jpg?height=1080&width=1920&text=Salon+de+Paris"
+              alt="Salon de Paris - Élégance intemporelle à Marrakech"
               fill
               className="object-cover"
               priority
+              sizes="100vw"
+              quality={90}
             />
             <div className="absolute inset-0 bg-gradient-to-r from-salon-black/90 to-salon-black/60" />
           </motion.div>
@@ -125,7 +130,7 @@ export default function Home() {
         <div className="relative z-10 flex flex-col items-center justify-center text-center max-w-3xl mx-auto px-4">
           {/* Logo centered */}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }} className="mb-8">
-            <Image
+            <ImageWithFallback
               src="/salondeparis-logo.png?height=150&width=150"
               alt="Salon de Paris Logo"
               width={200}
@@ -249,28 +254,28 @@ export default function Home() {
 
                 <div className="grid grid-cols-3 gap-2 md:gap-4">
                   <motion.div
-                    className="bg-gold p-3 md:p-6 rounded-xl shadow-md"
-                    whileHover={{ y: -10, backgroundColor: "#DAA520" }}
+                    className="bg-gold p-3 md:p-6 rounded-xl shadow-md text-salon-gray hover:text-white"
+                    whileHover={{ y: -10, backgroundColor: "black" }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
-                    <div className="text-xl md:text-3xl font-heading font-bold text-salon-black mb-1 md:mb-2">40+</div>
-                    <p className="text-salon-gray text-xs md:text-base">Années d'excellence</p>
+                    <div className="text-xl md:text-3xl font-heading font-bold mb-1 md:mb-2">40+</div>
+                    <p className="text-xs md:text-base">Années d'excellence</p>
                   </motion.div>
                   <motion.div
-                    className="bg-gold p-3 md:p-6 rounded-xl shadow-md"
-                    whileHover={{ y: -10, backgroundColor: "#DAA520" }}
+                    className="bg-gold p-3 md:p-6 rounded-xl shadow-md text-salon-gray hover:text-white"
+                    whileHover={{ y: -10, backgroundColor: "black"}}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
-                    <div className="text-xl md:text-3xl font-heading font-bold text-salon-black mb-1 md:mb-2">8</div>
-                    <p className="text-salon-gray text-xs md:text-base">Artistes coiffeurs</p>
+                    <div className="text-xl md:text-3xl font-heading font-bold mb-1 md:mb-2">8</div>
+                    <p className="text-xs md:text-base">Artistes coiffeurs</p>
                   </motion.div>
                   <motion.div
-                    className="bg-gold p-3 md:p-6 rounded-xl shadow-md"
-                    whileHover={{ y: -10, backgroundColor: "#DAA520" }}
+                    className="bg-gold p-3 md:p-6 rounded-xl shadow-md text-salon-gray hover:text-white"
+                    whileHover={{ y: -10, backgroundColor: "black" }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
-                    <div className="text-xl md:text-3xl font-heading font-bold text-salon-black mb-1 md:mb-2">∞</div>
-                    <p className="text-salon-gray text-xs md:text-base">Possibilités créatives</p>
+                    <div className="text-xl md:text-3xl font-heading font-bold mb-1 md:mb-2">∞</div>
+                    <p className="text-xs md:text-base">Possibilités créatives</p>
                   </motion.div>
                 </div>
 
@@ -320,7 +325,7 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.1 }}
               whileHover={{ y: -10 }}
               style={{
-                backgroundImage: "url('/IMG-20250320-WA0023.jpg?height=400&width=300')",
+                backgroundImage: "url('/IMG-20250320-WA0009.jpg?height=400&width=300&text=Principe')",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
@@ -345,7 +350,7 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.2 }}
               whileHover={{ y: -10 }}
               style={{
-                backgroundImage: "url('/IMG-20250320-WA0028.jpg?height=400&width=300')",
+                backgroundImage: "url('/IMG-20250321-WA0009.jpg?height=400&width=300&text=Principe')",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
@@ -383,7 +388,7 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.3 }}
               whileHover={{ y: -10 }}
               style={{
-                backgroundImage: "url('/IMG-20250321-WA0007.jpg?height=400&width=300')",
+                backgroundImage: "url('/IMG-20250321-WA0007.jpg?height=400&width=300&text=Principe')",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
@@ -422,7 +427,7 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.4 }}
               whileHover={{ y: -10 }}
               style={{
-                backgroundImage: "url('/IMG-20250320-WA0025.jpg?height=400&width=300')",
+                backgroundImage: "url('/IMG-20250320-WA0027.jpg?height=400&width=300&text=Principe')",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
@@ -460,7 +465,7 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.5 }}
               whileHover={{ y: -10 }}
               style={{
-                backgroundImage: "url('/IMG-20250320-WA0009.jpg?height=400&width=300')",
+                backgroundImage: "url('/IMG-20250320-WA0023.jpg?height=400&width=300&text=Principe')",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
@@ -529,7 +534,7 @@ export default function Home() {
                 <article className="bg-white rounded-xl overflow-hidden shadow-lg h-full flex flex-col border border-gold/30 hover:border-gold/70 transition-all duration-300">
                   <div className="relative h-52 overflow-hidden">
                     <Image
-                      src="/placeholder.svg?height=400&width=600"
+                      src="/blog1.jpg?height=400&width=600"
                       alt="L'élégance intemporelle du Salon de Paris"
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -563,7 +568,7 @@ export default function Home() {
                 <article className="bg-white rounded-xl overflow-hidden shadow-lg h-full flex flex-col border border-gold/30 hover:border-gold/70 transition-all duration-300">
                   <div className="relative h-52 overflow-hidden">
                     <Image
-                      src="/placeholder.svg?height=400&width=600"
+                      src="/blog2.jpg?height=400&width=600"
                       alt="Chic parisien"
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -599,7 +604,7 @@ export default function Home() {
                 <article className="bg-white rounded-xl overflow-hidden shadow-lg h-full flex flex-col border border-gold/30 hover:border-gold/70 transition-all duration-300">
                   <div className="relative h-52 overflow-hidden">
                     <Image
-                      src="/placeholder.svg?height=400&width=600"
+                      src="/blog3.webp?height=400&width=600"
                       alt="Le secret des cheveux sublimes"
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -712,7 +717,7 @@ export default function Home() {
             <AnimatedButton
               href="+21252442273"
               tel={true}
-              variant="dark"
+              variant="black"
               animation="border-spin"
               size="lg"
               icon={<Phone className="h-5 w-5" />}

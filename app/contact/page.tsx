@@ -2,7 +2,8 @@
 
 import { useRef } from "react"
 import Link from "next/link"
-import { Phone, MapPin, Instagram } from "lucide-react"
+import Image from "next/image"
+import { Phone, MapPin, Instagram, Mail, Clock, ChevronRight } from "lucide-react"
 import { motion, useInView } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import Header from "@/components/header"
@@ -23,10 +24,19 @@ export default function ContactPage() {
     <div className="flex flex-col min-h-screen">
       <Header />
 
-      {/* Hero Section */}
-      <section ref={heroRef} className="relative pt-32 pb-20 bg-cream overflow-hidden">
-        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white/50 to-transparent"></div>
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white/50 to-transparent"></div>
+      {/* Hero Section with Background Image */}
+      <section ref={heroRef} className="relative pt-32 pb-20 overflow-hidden">
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/IMG-20250321-WA0004.jpg?height=1080&width=1920&text=Contact"
+            alt="Salon de Paris Contact"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-salon-black/80 to-salon-black/60" />
+        </div>
 
         <div className="salon-container relative z-10">
           <motion.div
@@ -35,119 +45,147 @@ export default function ContactPage() {
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
           >
-            <span className="inline-block text-salon-gray border-b-2 border-cream-dark pb-1 uppercase tracking-wider text-sm font-medium mb-4">
+            <span className="inline-block text-gold border-b-2 border-gold pb-1 uppercase tracking-wider text-sm font-medium mb-4">
               Contactez-nous
             </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-salon-black mb-4">
-              Contactez-Nous
-            </h1>
-            <div className="h-1 w-20 bg-cream-dark rounded-full mx-auto mb-6"></div>
-            <p className="text-lg text-salon-gray">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white mb-4">Contactez-Nous</h1>
+            <div className="h-1 w-20 bg-gold rounded-full mx-auto mb-6"></div>
+            <p className="text-lg text-white/80">
               Nous sommes à votre disposition pour répondre à toutes vos questions et vous accueillir dans notre salon.
             </p>
           </motion.div>
         </div>
 
         {/* Decorative elements */}
-        <div className="absolute top-[-50px] right-[-50px] w-[200px] h-[200px] rounded-full bg-cream-dark/30 blur-3xl"></div>
-        <div className="absolute bottom-[-50px] left-[-50px] w-[200px] h-[200px] rounded-full bg-cream-dark/30 blur-3xl"></div>
+        <div className="absolute top-[-50px] right-[-50px] w-[200px] h-[200px] rounded-full bg-gold/20 blur-3xl"></div>
+        <div className="absolute bottom-[-50px] left-[-50px] w-[200px] h-[200px] rounded-full bg-gold/20 blur-3xl"></div>
       </section>
 
-      {/* Contact Information */}
-      <section className="py-20 bg-white">
-        <div className="salon-container">
+      {/* Contact Information Section */}
+      <section className="py-20 bg-white relative overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute top-0 right-0 w-[300px] h-[300px] rounded-full bg-cream/30 blur-3xl -z-0"></div>
+        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] rounded-full bg-cream/30 blur-3xl -z-0"></div>
+
+        <div className="salon-container relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-heading font-bold text-salon-black mb-4">Prenons Contact</h2>
+            <div className="h-1 w-20 bg-gold rounded-full mx-auto mb-6"></div>
+            <p className="text-lg text-salon-gray max-w-2xl mx-auto">
+              Que ce soit pour une réservation, une question ou simplement pour nous dire bonjour, nous sommes toujours
+              ravis d'échanger avec vous.
+            </p>
+          </div>
+
+          {/* Contact Information */}
           <motion.div
             ref={contactInfoRef}
-            className="bg-cream-light/50 p-8 rounded-xl shadow-lg border border-cream/50 max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 50 }}
+            className="bg-white p-8 md:p-10 rounded-xl shadow-lg border border-cream/50 max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
             animate={contactInfoInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <div className="space-y-4 text-center mb-8">
-              <h2 className="text-3xl font-heading font-bold text-salon-black">Nos Coordonnées</h2>
+            <div className="space-y-4 mb-10 text-center">
+              <h3 className="text-2xl font-heading font-bold text-salon-black">Nos Coordonnées</h3>
               <div className="h-1 w-16 bg-cream-dark rounded-full mx-auto"></div>
-              <p className="text-salon-gray text-lg">
-                N'hésitez pas à nous contacter pour toute information ou pour prendre rendez-vous.
+              <p className="text-salon-gray">
+                Retrouvez-nous au cœur de Marrakech pour une expérience de beauté exceptionnelle.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <motion.div
-                className="flex flex-col items-center gap-4 bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 text-center"
-                whileHover={{ y: -5 }}
-              >
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-cream shrink-0 shadow-md">
-                  <MapPin className="h-7 w-7 text-salon-black" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="flex items-start gap-4">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-cream shrink-0 shadow-md mt-1">
+                  <MapPin className="h-6 w-6 text-salon-black" />
                 </div>
                 <div>
-                  <h3 className="font-heading font-bold text-lg mb-2">Adresse</h3>
+                  <h4 className="font-heading font-bold text-lg mb-2">Adresse</h4>
                   <p className="text-salon-gray">
                     Rue Ibn Atya, Marrakesh 40000, Morocco, Marrakech, Marrakech-tensift-al Haouz 40000
                   </p>
                 </div>
-              </motion.div>
+              </div>
 
-              <motion.div
-                className="flex flex-col items-center gap-4 bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 text-center"
-                whileHover={{ y: -5 }}
-              >
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-cream shrink-0 shadow-md">
-                  <Phone className="h-7 w-7 text-salon-black" />
+              <div className="flex items-start gap-4">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-cream shrink-0 shadow-md mt-1">
+                  <Phone className="h-6 w-6 text-salon-black" />
                 </div>
                 <div>
-                  <h3 className="font-heading font-bold text-lg mb-2">Téléphone</h3>
-                  <Link href="tel:+21252442273" className="text-salon-gray hover:text-salon-black transition-colors">
+                  <h4 className="font-heading font-bold text-lg mb-2">Téléphone</h4>
+                  <Link href="tel:+21252442273" className="text-salon-gray hover:text-gold transition-colors">
                     +212 5244-22737
                   </Link>
                 </div>
-              </motion.div>
+              </div>
 
-              <motion.div
-                className="flex flex-col items-center gap-4 bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 text-center"
-                whileHover={{ y: -5 }}
-              >
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-cream shrink-0 shadow-md">
-                  <Instagram className="h-7 w-7 text-salon-black" />
+              <div className="flex items-start gap-4">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-cream shrink-0 shadow-md mt-1">
+                  <Instagram className="h-6 w-6 text-salon-black" />
                 </div>
                 <div>
-                  <h3 className="font-heading font-bold text-lg mb-2">Instagram</h3>
+                  <h4 className="font-heading font-bold text-lg mb-2">Instagram</h4>
                   <Link
                     href="https://www.instagram.com/salondeparis.marrakech/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-salon-gray hover:text-salon-black transition-colors"
+                    className="text-salon-gray hover:text-gold transition-colors"
                   >
                     @salondeparis.marrakech
                   </Link>
                 </div>
-              </motion.div>
-            </div>
+              </div>
 
-            <div className="mt-8 pt-6 bg-white p-8 rounded-lg shadow-md">
-              <h3 className="font-heading font-bold text-lg mb-4 border-b border-cream pb-2 text-center">
-                Horaires d'ouverture
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="flex flex-col items-center justify-center p-4 bg-cream-light/50 rounded-lg">
-                  <span className="font-medium">Lundi - Vendredi</span>
-                  <span className="text-salon-gray bg-cream py-1 px-3 rounded-full text-sm mt-2">9h - 19h</span>
+              <div className="flex items-start gap-4">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-cream shrink-0 shadow-md mt-1">
+                  <Mail className="h-6 w-6 text-salon-black" />
                 </div>
-                <div className="flex flex-col items-center justify-center p-4 bg-cream-light/50 rounded-lg">
-                  <span className="font-medium">Samedi</span>
-                  <span className="text-salon-gray bg-cream py-1 px-3 rounded-full text-sm mt-2">9h - 18h</span>
-                </div>
-                <div className="flex flex-col items-center justify-center p-4 bg-cream-light/50 rounded-lg">
-                  <span className="font-medium">Dimanche</span>
-                  <span className="text-salon-gray bg-cream py-1 px-3 rounded-full text-sm mt-2">Fermé</span>
+                <div>
+                  <h4 className="font-heading font-bold text-lg mb-2">Email</h4>
+                  <Link
+                    href="mailto:contact@salondeparis.ma"
+                    className="text-salon-gray hover:text-gold transition-colors"
+                  >
+                    contact@salondeparis.ma
+                  </Link>
                 </div>
               </div>
             </div>
 
-            <div className="mt-8 flex justify-center">
+            <div className="mt-12 pt-10 border-t border-cream">
+              <div className="flex items-start gap-4">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-cream shrink-0 shadow-md mt-1">
+                  <Clock className="h-6 w-6 text-salon-black" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-heading font-bold text-lg mb-4">Horaires d'ouverture</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="bg-cream/20 p-4 rounded-lg">
+                      <div className="flex justify-between items-center">
+                        <span className="text-salon-gray font-medium">Lundi - Dimanche</span>
+                        <span className="text-salon-black font-medium bg-cream py-1 px-3 rounded-full text-sm">
+                          9h - 21h
+                        </span>
+                      </div>
+                    </div>
+                    <div className="bg-cream/20 p-4 rounded-lg">
+                      <div className="flex justify-between items-center">
+                        <span className="text-salon-gray font-medium">Vendredi</span>
+                        <span className="text-salon-black font-medium bg-cream py-1 px-3 rounded-full text-sm">
+                          2h - 21h
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-12 pt-6 flex justify-center">
               <Link href="tel:+21252442273">
-                <Button className="bg-salon-black text-white hover:bg-salon-black/80 px-8 py-4 rounded-full shadow-lg">
-                  <Phone className="mr-2 h-5 w-5" />
-                  Réserver Maintenant
+                <Button className="bg-salon-black text-white hover:bg-salon-black/80 px-8 py-6 rounded-full shadow-lg group">
+                  <Phone className="mr-2 h-5 w-5 group-hover:animate-pulse" />
+                  Réserver par Téléphone
+                  <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Button>
               </Link>
             </div>

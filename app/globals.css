@@ -72,6 +72,9 @@
   }
   body {
     @apply bg-background text-foreground font-sans;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   h1,
   h2,
@@ -92,6 +95,26 @@
 
   p {
     @apply font-sans leading-relaxed;
+  }
+
+  /* Improve tap targets on mobile */
+  @media (max-width: 768px) {
+    button,
+    a {
+      min-height: 44px;
+      min-width: 44px;
+    }
+  }
+
+  /* Fix 100vh issue on mobile */
+  .h-screen {
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+  }
+
+  /* Improve focus styles for accessibility */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-gold;
   }
 }
 
@@ -163,6 +186,13 @@
   .blog-card {
     @apply bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gold/50;
   }
+
+  /* Optimized touch targets for mobile */
+  @media (max-width: 768px) {
+    .mobile-touch-target {
+      @apply min-h-[44px] py-3 px-4;
+    }
+  }
 }
 
 /* Custom scrollbar */
@@ -199,5 +229,96 @@ html {
 
 .image-zoom:hover img {
   transform: scale(1.05);
+}
+
+/* Add these keyframe animations to the end of your globals.css file */
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(0) skewX(-12deg);
+  }
+  100% {
+    transform: translateX(200%) skewX(-12deg);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 5px 2px rgba(255, 236, 179, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 15px 5px rgba(255, 213, 79, 0.5);
+  }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+    color: #000;
+    background: #fff;
+  }
+
+  a {
+    text-decoration: underline;
+    color: #000;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+
+  .salon-container {
+    max-width: 100%;
+    padding: 0;
+  }
 }
 

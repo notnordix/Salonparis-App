@@ -70,12 +70,8 @@ export default function Footer() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
-                <div className="relative">
-                  <h3 className="text-lg font-heading font-bold text-white inline-block">
-                    Liens Rapides
-                    <span className="absolute -bottom-2 left-0 w-full h-0.5 bg-gold"></span>
-                  </h3>
-                </div>
+                <h3 className="text-lg font-heading font-bold text-white">Liens Rapides</h3>
+                <div className="h-1 w-12 bg-gold rounded-full"></div>
 
                 <nav className="mt-8 grid grid-cols-1 gap-4">
                   {[
@@ -111,15 +107,15 @@ export default function Footer() {
                   <div className="flex items-start space-x-2">
                     <Clock className="h-4 w-4 text-gold mt-0.5 shrink-0" />
                     <div>
-                      <p className="text-sm font-medium text-white">Lundi - Vendredi</p>
-                      <p className="text-xs text-white/70">9h - 19h</p>
+                      <p className="text-sm font-medium text-white">Lundi - Dimanche</p>
+                      <p className="text-xs text-white/70">9h - 21h</p>
                     </div>
                   </div>
                   <div className="flex items-start space-x-2">
                     <Clock className="h-4 w-4 text-gold mt-0.5 shrink-0" />
                     <div>
-                      <p className="text-sm font-medium text-white">Samedi</p>
-                      <p className="text-xs text-white/70">9h - 18h</p>
+                      <p className="text-sm font-medium text-white">Vendredi</p>
+                      <p className="text-xs text-white/70">2h - 21h</p>
                     </div>
                   </div>
                 </div>
