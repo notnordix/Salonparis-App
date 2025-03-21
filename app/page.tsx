@@ -11,60 +11,49 @@ import AnimatedButton from "@/components/animated-button"
 import StructuredData from "@/components/structured-data"
 import ImageWithFallback from "@/components/image-with-fallback"
 
-// Typewriter effect component - Made translation-friendly
+// Completely rewritten TypewriterEffect component to be translation-safe
 const TypewriterEffect = ({ text }: { text: string }) => {
   const [displayText, setDisplayText] = useState("")
-  const textRef = useRef(text)
 
+  // Use a simple approach without complex state management
   useEffect(() => {
-    // Store the original text to prevent translation issues
-    textRef.current = text
+    // Store the original text in a variable that won't be affected by translation
+    const originalText = text
+    let currentIndex = 0
+    let direction = 1 // 1 for typing, -1 for deleting
 
-    let index = 0
-    let isDeleting = false
-    let typingSpeed = 150
-
-    const typeWriter = () => {
-      // Always use the original text from ref to avoid translation issues
-      const currentText = textRef.current
-
-      if (!isDeleting) {
-        // Typing forward
-        setDisplayText(currentText.substring(0, index + 1))
-        index++
-
-        // If we've typed the full text
-        if (index === currentText.length) {
-          // Pause at the end
-          typingSpeed = 1500
-          isDeleting = true
+    const typeInterval = setInterval(
+      () => {
+        if (direction === 1) {
+          // Typing forward
+          currentIndex += 1
+          if (currentIndex > originalText.length) {
+            // Pause at the end before deleting
+            setTimeout(() => {
+              direction = -1
+            }, 1500)
+          } else {
+            setDisplayText(originalText.substring(0, currentIndex))
+          }
         } else {
-          // Normal typing speed
-          typingSpeed = 150
+          // Deleting
+          currentIndex -= 1
+          if (currentIndex < 0) {
+            // Pause before typing again
+            setTimeout(() => {
+              direction = 1
+            }, 1000)
+            currentIndex = 0
+          } else {
+            setDisplayText(originalText.substring(0, currentIndex))
+          }
         }
-      } else {
-        // Deleting
-        setDisplayText(currentText.substring(0, index - 1))
-        index--
+      },
+      direction === 1 ? 150 : 75,
+    )
 
-        // If we've deleted everything
-        if (index === 0) {
-          isDeleting = false
-          // Pause before starting again
-          typingSpeed = 1000
-        } else {
-          // Faster deletion speed
-          typingSpeed = 75
-        }
-      }
-
-      setTimeout(typeWriter, typingSpeed)
-    }
-
-    const timerId = setTimeout(typeWriter, 500)
-
-    return () => clearTimeout(timerId)
-  }, []) // Empty dependency array to run only once
+    return () => clearInterval(typeInterval)
+  }, [text]) // Only run once on mount
 
   return (
     <div className="flex items-center justify-center">

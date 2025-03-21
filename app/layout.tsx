@@ -55,21 +55,12 @@ export const metadata: Metadata = {
     siteName: "Le Salon de Paris",
     locale: "fr_FR",
     type: "website",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Le Salon de Paris Marrakech",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Le Salon de Paris - Coiffure d'Exception à Marrakech",
     description:
       "Salon de coiffure et beauté d'exception à Marrakech depuis 1980. Expertise française, élégance intemporelle et service personnalisé.",
-    images: ["/twitter-image.jpg"],
   },
   viewport: {
     width: "device-width",
@@ -98,6 +89,7 @@ export default function RootLayout({
       lang="fr"
       className={`${montserrat.variable} ${raleway.variable} ${lato.variable} light`}
       suppressHydrationWarning
+      translate="no"
     >
       <head>
         {/* Preconnect to domains for faster loading */}
@@ -109,12 +101,8 @@ export default function RootLayout({
 
         {/* Favicon */}
         <link rel="icon" href="/favicon.png" sizes="any" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-
-        {/* PWA manifest */}
-        <link rel="manifest" href="/manifest.json" />
       </head>
-      <body className="bg-background text-foreground">
+      <body className="bg-background text-foreground notranslate">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           {children}
           <FloatingCallButton />
