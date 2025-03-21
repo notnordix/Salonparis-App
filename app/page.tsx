@@ -11,68 +11,64 @@ import AnimatedButton from "@/components/animated-button"
 import StructuredData from "@/components/structured-data"
 import ImageWithFallback from "@/components/image-with-fallback"
 
-// Typewriter effect component
+// Typewriter effect component - Made translation-friendly
 const TypewriterEffect = ({ text }: { text: string }) => {
   const [displayText, setDisplayText] = useState("")
-  const [index, setIndex] = useState(0)
-  const [isDeleting, setIsDeleting] = useState(false)
-  const [typingSpeed, setTypingSpeed] = useState(150)
-
-  // Store the original text in a ref to prevent translation issues
-  const originalTextRef = useRef(text)
+  const textRef = useRef(text)
 
   useEffect(() => {
-    try {
-      // Use the ref value instead of the prop directly
-      const currentText = originalTextRef.current || "DEPUIS 1980"
+    // Store the original text to prevent translation issues
+    textRef.current = text
 
-      const timer = setTimeout(() => {
-        if (!isDeleting) {
-          // Typing forward
-          setDisplayText(currentText.substring(0, index + 1))
-          setIndex((prev) => prev + 1)
+    let index = 0
+    let isDeleting = false
+    let typingSpeed = 150
 
-          // If we've typed the full text
-          if (index === currentText.length) {
-            // Pause at the end
-            setTypingSpeed(1500)
-            setIsDeleting(true)
-          } else {
-            // Normal typing speed
-            setTypingSpeed(150)
-          }
+    const typeWriter = () => {
+      // Always use the original text from ref to avoid translation issues
+      const currentText = textRef.current
+
+      if (!isDeleting) {
+        // Typing forward
+        setDisplayText(currentText.substring(0, index + 1))
+        index++
+
+        // If we've typed the full text
+        if (index === currentText.length) {
+          // Pause at the end
+          typingSpeed = 1500
+          isDeleting = true
         } else {
-          // Deleting
-          setDisplayText(currentText.substring(0, index - 1))
-          setIndex((prev) => prev - 1)
-
-          // If we've deleted everything
-          if (index === 0) {
-            setIsDeleting(false)
-            // Pause before starting again
-            setTypingSpeed(1000)
-          } else {
-            // Faster deletion speed
-            setTypingSpeed(75)
-          }
+          // Normal typing speed
+          typingSpeed = 150
         }
-      }, typingSpeed)
+      } else {
+        // Deleting
+        setDisplayText(currentText.substring(0, index - 1))
+        index--
 
-      return () => clearTimeout(timer)
-    } catch (error) {
-      // Fallback in case of error
-      console.error("Typewriter effect error:", error)
-      setDisplayText(originalTextRef.current || "DEPUIS 1980")
+        // If we've deleted everything
+        if (index === 0) {
+          isDeleting = false
+          // Pause before starting again
+          typingSpeed = 1000
+        } else {
+          // Faster deletion speed
+          typingSpeed = 75
+        }
+      }
+
+      setTimeout(typeWriter, typingSpeed)
     }
-  }, [index, isDeleting, typingSpeed])
+
+    const timerId = setTimeout(typeWriter, 500)
+
+    return () => clearTimeout(timerId)
+  }, []) // Empty dependency array to run only once
 
   return (
     <div className="flex items-center justify-center">
-      <span
-        className="text-sm md:text-sm font-heading tracking-widest text-gold border-b-2 border-gold px-2 py-1"
-        // Add data attribute to help with translation issues
-        data-typewriter-text="DEPUIS 1980"
-      >
+      <span className="text-sm md:text-sm font-heading tracking-widest text-gold border-b-2 border-gold px-2 py-1">
         {displayText}
         <span className="animate-pulse">|</span>
       </span>
@@ -98,18 +94,6 @@ export default function Home() {
 
   const mapRef = useRef<HTMLDivElement>(null)
   const mapInView = useInView(mapRef, { once: true, amount: 0.5 })
-
-  // Error handling for browser translation issues
-  useEffect(() => {
-    const handleError = (event: ErrorEvent) => {
-      console.log("Caught error:", event.message)
-      // Prevent the default error handling
-      event.preventDefault()
-    }
-
-    window.addEventListener("error", handleError)
-    return () => window.removeEventListener("error", handleError)
-  }, [])
 
   // For viewport height fixing on mobile
   useEffect(() => {
@@ -175,7 +159,6 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            {/* Use a fixed string that won't change with translation */}
             <TypewriterEffect text="DEPUIS 1980" />
           </motion.div>
 
