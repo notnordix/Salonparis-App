@@ -239,7 +239,7 @@ export default function AboutPage() {
               <AnimatedButton
                 href="+21252442273"
                 tel={true}
-                variant="black"
+                variant="primary"
                 animation="border-spin"
                 size="lg"
                 icon={<Phone className="h-5 w-5" />}
