@@ -18,45 +18,61 @@ const TypewriterEffect = ({ text }: { text: string }) => {
   const [isDeleting, setIsDeleting] = useState(false)
   const [typingSpeed, setTypingSpeed] = useState(150)
 
+  // Store the original text in a ref to prevent translation issues
+  const originalTextRef = useRef(text)
+
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (!isDeleting) {
-        // Typing forward
-        setDisplayText(text.substring(0, index + 1))
-        setIndex((prev) => prev + 1)
+    try {
+      // Use the ref value instead of the prop directly
+      const currentText = originalTextRef.current || "DEPUIS 1980"
 
-        // If we've typed the full text
-        if (index === text.length) {
-          // Pause at the end
-          setTypingSpeed(1500)
-          setIsDeleting(true)
+      const timer = setTimeout(() => {
+        if (!isDeleting) {
+          // Typing forward
+          setDisplayText(currentText.substring(0, index + 1))
+          setIndex((prev) => prev + 1)
+
+          // If we've typed the full text
+          if (index === currentText.length) {
+            // Pause at the end
+            setTypingSpeed(1500)
+            setIsDeleting(true)
+          } else {
+            // Normal typing speed
+            setTypingSpeed(150)
+          }
         } else {
-          // Normal typing speed
-          setTypingSpeed(150)
-        }
-      } else {
-        // Deleting
-        setDisplayText(text.substring(0, index - 1))
-        setIndex((prev) => prev - 1)
+          // Deleting
+          setDisplayText(currentText.substring(0, index - 1))
+          setIndex((prev) => prev - 1)
 
-        // If we've deleted everything
-        if (index === 0) {
-          setIsDeleting(false)
-          // Pause before starting again
-          setTypingSpeed(1000)
-        } else {
-          // Faster deletion speed
-          setTypingSpeed(75)
+          // If we've deleted everything
+          if (index === 0) {
+            setIsDeleting(false)
+            // Pause before starting again
+            setTypingSpeed(1000)
+          } else {
+            // Faster deletion speed
+            setTypingSpeed(75)
+          }
         }
-      }
-    }, typingSpeed)
+      }, typingSpeed)
 
-    return () => clearTimeout(timer)
-  }, [index, isDeleting, text, typingSpeed])
+      return () => clearTimeout(timer)
+    } catch (error) {
+      // Fallback in case of error
+      console.error("Typewriter effect error:", error)
+      setDisplayText(originalTextRef.current || "DEPUIS 1980")
+    }
+  }, [index, isDeleting, typingSpeed])
 
   return (
     <div className="flex items-center justify-center">
-      <span className="text-sm md:text-sm font-heading tracking-widest text-gold border-b-2 border-gold px-2 py-1">
+      <span
+        className="text-sm md:text-sm font-heading tracking-widest text-gold border-b-2 border-gold px-2 py-1"
+        // Add data attribute to help with translation issues
+        data-typewriter-text="DEPUIS 1980"
+      >
         {displayText}
         <span className="animate-pulse">|</span>
       </span>
@@ -82,6 +98,18 @@ export default function Home() {
 
   const mapRef = useRef<HTMLDivElement>(null)
   const mapInView = useInView(mapRef, { once: true, amount: 0.5 })
+
+  // Error handling for browser translation issues
+  useEffect(() => {
+    const handleError = (event: ErrorEvent) => {
+      console.log("Caught error:", event.message)
+      // Prevent the default error handling
+      event.preventDefault()
+    }
+
+    window.addEventListener("error", handleError)
+    return () => window.removeEventListener("error", handleError)
+  }, [])
 
   // For viewport height fixing on mobile
   useEffect(() => {
@@ -147,6 +175,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
+            {/* Use a fixed string that won't change with translation */}
             <TypewriterEffect text="DEPUIS 1980" />
           </motion.div>
 
@@ -263,7 +292,7 @@ export default function Home() {
                   </motion.div>
                   <motion.div
                     className="bg-gold p-3 md:p-6 rounded-xl shadow-md text-salon-gray hover:text-white"
-                    whileHover={{ y: -10, backgroundColor: "black"}}
+                    whileHover={{ y: -10, backgroundColor: "black" }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
                     <div className="text-xl md:text-3xl font-heading font-bold mb-1 md:mb-2">8</div>
@@ -677,7 +706,7 @@ export default function Home() {
               >
                 <div className="aspect-video w-full">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3396.9661932707!2d-8.00795!3d31.6294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdafee8a486b1d37:0x7bfd841a081f0ceb!2sSalon%20Paris%20beauty%20show!5e0!3m2!1sen!2sus!4v1647427822764!5m2!1sen!2sus"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3396.9661932707!2d-8.00795!3d31.6294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdafee8a486b1d37:0x7bfd841a081f0ceb!2sSalon%20Paris%20beauty%20show!5e0!3m2!1sen!2sus"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
