@@ -15,7 +15,7 @@ const blogPosts = {
     title: "L'élégance intemporelle du Salon de Paris",
     subtitle: "Une histoire d'excellence depuis 1980",
     date: "15 Mars 2025",
-    image: "/blog1.jpg?height=600&width=1200",
+    image: "/placeholder.svg?height=600&width=1200",
     content: `
       <h2>Depuis plus de quatre décennies, Le Salon de Paris s'est imposé comme une référence incontournable dans l'univers de la coiffure de prestige. Fondé en 1980 par le visionnaire Si Ahmed, notre établissement incarne la parfaite alliance entre tradition française et innovations contemporaines.</h2>
       
@@ -37,7 +37,7 @@ const blogPosts = {
     title: "Chic parisien",
     subtitle: "Les coiffures intemporelles qui ne se démodent jamais",
     date: "10 Mars 2025",
-    image: "/blog2.jpg?height=600&width=1200",
+    image: "/placeholder.svg?height=600&width=1200",
     content: `
       <h2>La coiffure parisienne incarne l'élégance naturelle et la simplicité sophistiquée dans toute sa splendeur. Au Salon de Paris, nos experts maîtrisent parfaitement ces styles intemporels qui révèlent et subliment votre personnalité unique.</h2>
       
@@ -64,7 +64,7 @@ const blogPosts = {
     title: "Le secret des cheveux sublimes",
     subtitle: "Nos soins capillaires exclusifs",
     date: "5 Mars 2025",
-    image: "/blog3.webp?height=600&width=1200",
+    image: "/placeholder.svg?height=600&width=1200",
     content: `
       <h2>Une belle coiffure s'épanouit sur un terrain fertile : des cheveux en pleine santé. Au Salon de Paris, nous avons développé une gamme de soins capillaires exclusifs conçus pour restaurer, nourrir et sublimer chaque type de chevelure.</h2>
       
@@ -92,7 +92,7 @@ const blogPosts = {
     title: "Coiffure de mariée",
     subtitle: "Le guide ultime pour être sublime le jour J",
     date: "28 Février 2025",
-    image: "/blog4.webp?height=600&width=1200",
+    image: "/placeholder.svg?height=600&width=1200",
     content: `
       <h2>Le jour de votre mariage représente l'apogée de votre mise en beauté, et votre coiffure doit être aussi resplendissante que votre tenue. Au Salon de Paris, notre équipe d'artistes capillaires conçoit des créations sur-mesure qui magnifient votre beauté naturelle et complètent parfaitement votre silhouette nuptiale.</h2>
       
@@ -119,7 +119,7 @@ const blogPosts = {
     title: "Les bienfaits du massage du cuir chevelu",
     subtitle: "Le secret pour des cheveux forts et en bonne santé",
     date: "20 Février 2025",
-    image: "/blog5.png?height=600&width=1200",
+    image: "/placeholder.svg?height=600&width=1200",
     content: `
       <h2>Le massage du cuir chevelu est une pratique ancestrale trop souvent négligée, pourtant fondamentale pour la vitalité capillaire et l'équilibre du cuir chevelu. Au Salon de Paris, nous avons intégré cette technique précieuse au cœur de nos protocoles de soins pour offrir une expérience alliant efficacité thérapeutique et bien-être profond.</h2>
       
@@ -153,7 +153,13 @@ const blogPosts = {
   },
 }
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
+type BlogPostPageProps = {
+  params: {
+    slug: string
+  }
+}
+
+export default function BlogPostPage({ params }: BlogPostPageProps) {
   const post = blogPosts[params.slug as keyof typeof blogPosts]
 
   // For animated sections
@@ -235,7 +241,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
               <p className="text-salon-gray mb-6">
                 Contactez-nous pour prendre rendez-vous et bénéficier de notre expertise.
               </p>
-              <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.95 }}>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Link href="tel:+21252442273">
                   <Button className="btn-primary rounded-full shadow-md">
                     <Phone className="mr-2 h-4 w-4" />
